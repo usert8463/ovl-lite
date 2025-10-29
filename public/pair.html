@@ -5,301 +5,490 @@
   <title>OVL-MD-V2-PAIR-CODE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="https://telegra.ph/file/cc4539ee3298796719589.jpg" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Inter', sans-serif;
+      background: #0a0e27;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
       position: relative;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 2rem 1rem 2.5rem 1rem;
-      width: 100%;
-      max-width: 420px;
-      text-align: center;
-      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
-      animation: zoomIn 0.6s;
-      margin: 24px 0;
-    }
-
-    @keyframes zoomIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    h2 {
-      font-size: 1.6rem;
-      margin-bottom: 1.2rem;
-      color: #fff;
-      letter-spacing: 1px;
-      font-weight: 700;
-    }
-
-    .input-group {
-      display: flex;
-      margin-bottom: 1.5rem;
-      border-radius: 10px;
       overflow: hidden;
-      background-color: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.1);
-      align-items: stretch;
     }
 
-    .input-group input {
-      flex: 1;
-      padding: 0.8rem;
-      font-size: 1rem;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: #fff;
-      height: 48px;
-      min-width: 0;
+    body::before {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle at 20% 50%, rgba(120,40,200,0.15), transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(33,150,243,0.15), transparent 50%),
+                  radial-gradient(circle at 40% 20%, rgba(236,64,122,0.1), transparent 40%);
+      animation: drift 20s ease-in-out infinite;
+      z-index: 0;
     }
 
-    .go-btn {
-      padding: 0 20px;
-      font-size: 15px;
-      font-weight: 500;
-      border: none;
-      border-radius: 0 10px 10px 0;
-      cursor: pointer;
-      background: rgba(0,123,255,0.7);
-      color: #fff;
-      transition: 0.3s;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      gap: 0.5em;
-    }
-    .go-btn:hover {
-      background: rgba(0,123,255,0.95);
+    @keyframes drift {
+      0%, 100% { transform: translate(0,0) rotate(0deg); }
+      50% { transform: translate(-50px,50px) rotate(5deg); }
     }
 
-    #pairResult {
-      margin-bottom: 1.3rem;
-      font-size: 1.08rem;
-      color: #fff;
-      min-height: 23px;
-      letter-spacing: 1px;
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      padding: 20px;
     }
 
-    .copy-btn {
+    .glass-card {
+      background: rgba(15,23,42,0.6);
+      backdrop-filter: blur(40px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(120,40,200,0.08), transparent 70%);
+      animation: rotate 15s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .logo-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 1.2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.65em;
-      background: #2196f3;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
+      font-size: 2rem;
+      box-shadow: 0 8px 24px rgba(102,126,234,0.3);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+    }
+
+    .form-section {
+      margin-bottom: 2rem;
+    }
+
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .input-container {
+      position: relative;
+      display: flex;
+      gap: 12px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 1rem 1.2rem;
       font-size: 1rem;
-      font-weight: 500;
-      padding: 0.85em 1.2em;
-      margin: 0.2em auto 0.7em auto;
-      width: 90%;
-      max-width: 300px;
-      box-shadow: 0 4px 16px rgba(33,150,243,0.10);
-      cursor: pointer;
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-    .copy-btn:hover, .copy-btn:focus {
-      background: #0b7dda;
-      box-shadow: 0 2px 12px rgba(33,150,243,0.18);
+      border: 2px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
       outline: none;
-    }
-    .copy-btn i {
-      font-size: 1.1em;
-      margin-right: 0.3em;
-    }
-
-    .session-box {
-      margin: 1.2rem 0 0.3rem 0;
-      padding: 1rem 1.2rem 0.2rem 1.2rem;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      color: #00bfff;
-      box-shadow: 0 0 20px rgba(0,123,255,0.13);
-      display: none;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 500;
     }
 
-    .session-box p {
-      font-size: 1.02rem;
-      word-break: break-word;
+    input[type="text"]:focus {
+      border-color: rgba(102,126,234,0.6);
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
+    }
+
+    input[type="text"]::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .submit-btn {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 8px 24px rgba(102,126,234,0.25);
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(102,126,234,0.35);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .result-area {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.03);
+      border: 2px dashed rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+
+    .result-content {
+      text-align: center;
+      width: 100%;
+    }
+
+    .result-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
       letter-spacing: 1px;
-      color: #b2e3ff;
-      margin-bottom: 0.7em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .result-code {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+      font-family: 'Courier New', monospace;
+      text-shadow: 0 0 20px rgba(102,126,234,0.5);
+    }
+
+    .result-message {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+
+    .copy-button {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 2px solid rgba(102,126,234,0.3);
+      background: rgba(102,126,234,0.1);
+      border-radius: 14px;
+      cursor: pointer;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .copy-button:hover {
+      background: rgba(102,126,234,0.2);
+      border-color: rgba(102,126,234,0.5);
+      transform: translateY(-1px);
+    }
+
+    .copy-button.copied {
+      background: rgba(34,197,94,0.2);
+      border-color: rgba(34,197,94,0.5);
     }
 
     .spinner {
-      width: 18px;
-      height: 18px;
-      border: 3px solid transparent;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.2);
       border-top: 3px solid #fff;
       border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto;
+      animation: spin 0.8s linear infinite;
     }
 
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
 
-    .particles {
-      position: absolute;
+    .bg-orbs {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
-      z-index: -1;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .particles span {
+    .orb {
       position: absolute;
-      display: block;
-      width: 20px;
-      height: 20px;
-      background: rgba(255,255,255,0.05);
-      animation: animate 20s linear infinite;
       border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: float-orb 20s ease-in-out infinite;
     }
-    @keyframes animate {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+
+    @keyframes float-orb {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(50px,-50px) scale(1.1); }
+      66% { transform: translate(-30px,40px) scale(0.9); }
     }
-    .particles span:nth-child(odd) {
-      background: rgba(0,123,255,0.05);
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 350px;
+      height: 350px;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      bottom: 10%;
+      right: 10%;
+      animation-delay: 7s;
+    }
+
+    .orb-3 {
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      top: 50%;
+      left: 50%;
+      animation-delay: 14s;
+    }
+
+    @media (max-width: 640px) {
+      .glass-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .logo-icon {
+        width: 64px;
+        height: 64px;
+        font-size: 1.75rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .input-container {
+        flex-direction: column;
+      }
+
+      .submit-btn {
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="card">
-    <h2><i class="fas fa-link"></i> OVL-V2-PAIR-CODE</h2>
-    <div class="input-group">
-      <input type="text" id="number" placeholder="+226xxxxxxxx" />
-      <button id="submit" class="go-btn"><i class="fas fa-paper-plane"></i> Go</button>
-    </div>
-    <div id="pairResult"></div>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
 
-    <button id="copyCodeBtn" class="copy-btn" style="display:none;">
-      <i class="fas fa-copy"></i> Copier le CODE
-    </button>
+  <div class="container">
+    <div class="glass-card">
+      <div class="header">
+        <div class="logo-icon">
+          <i class="fas fa-code"></i>
+        </div>
+        <h1>OVL-MD V2</h1>
+        <p class="subtitle">Générateur de Code de Pairage</p>
+      </div>
 
-    <div id="sessionBox" class="session-box">
-      <p id="sessionId">SESSION-XXXXXXXX</p>
-      <button id="copySessionBtn" class="copy-btn" style="display:none;">
-        <i class="fas fa-copy"></i> Copier la SESSION-ID
+      <div class="form-section">
+        <div class="input-wrapper">
+          <label class="input-label">Numéro de téléphone</label>
+          <div class="input-container">
+            <input type="text" id="number" placeholder="+226 XX XX XX XX" />
+            <button id="submit" class="submit-btn">
+              <i class="fas fa-bolt"></i>
+              <span>Générer</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-area" id="resultArea">
+        <div class="result-content" id="pairResult">
+          <p class="result-message">Entrez votre numéro pour générer le code</p>
+        </div>
+      </div>
+
+      <button id="copyCodeBtn" class="copy-button" style="display:none;">
+        <i class="fas fa-copy"></i>
+        <span id="copyText">Copier le code</span>
       </button>
     </div>
   </div>
 
-  <div class="particles">
-    <span style="left: 10%; animation-delay: 0s;"></span>
-    <span style="left: 25%; animation-delay: 2s;"></span>
-    <span style="left: 40%; animation-delay: 4s;"></span>
-    <span style="left: 55%; animation-delay: 1s;"></span>
-    <span style="left: 70%; animation-delay: 3s;"></span>
-    <span style="left: 85%; animation-delay: 5s;"></span>
-  </div>
   <script>
-  const numberInput = document.getElementById('number');
-  const pairResult = document.getElementById('pairResult');
-  const sessionId = document.getElementById('sessionId');
-  const copyCodeBtn = document.getElementById('copyCodeBtn');
-  const copySessionBtn = document.getElementById('copySessionBtn');
-  const sessionBox = document.getElementById('sessionBox');
-  const submitBtn = document.getElementById('submit');
+    const numberInput = document.getElementById('number');
+    const pairResult = document.getElementById('pairResult');
+    const copyCodeBtn = document.getElementById('copyCodeBtn');
+    const submitBtn = document.getElementById('submit');
+    const copyText = document.getElementById('copyText');
 
-  let currentCode = "";
-  let currentSessionId = "";
+    let currentCode = "";
 
-  submitBtn.addEventListener('click', async () => {
-    const number = numberInput.value.trim();
-    if (!number || number.length < 8) {
-      pairResult.textContent = 'Veuillez entrer un numéro valide.';
-      return;
-    }
-
-    pairResult.innerHTML = '<div class="spinner"></div>';
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<div class="spinner"></div>';
-
-    const cleanNumber = number.replace(/[^0-9]/g, '');
-
-    try {
-      const response = await fetch(`/code?number=${cleanNumber}`);
-      const json = await response.json();
-
-      if (json.error) {
-        pairResult.textContent = `Erreur : ${json.error}`;
-        resetSubmit();
+    submitBtn.addEventListener('click', async () => {
+      const number = numberInput.value.trim();
+      if (!number || number.length < 8) {
+        pairResult.innerHTML = '<p class="result-message" style="color:#f87171;">Veuillez entrer un numéro valide</p>';
         return;
       }
 
-      if (json.code) {
-        currentCode = json.code;
-        pairResult.innerHTML = `<strong>CODE:</strong> ${currentCode}`;
-        copyCodeBtn.style.display = 'flex';
+      pairResult.innerHTML = '<div class="spinner"></div>';
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<div class="spinner"></div>';
+      copyCodeBtn.style.display = 'none';
+
+      const cleanNumber = number.replace(/[^0-9]/g, '');
+
+      try {
+        const response = await fetch(`/code?number=${cleanNumber}`);
+        const json = await response.json();
+
+        if (json.error) {
+          pairResult.innerHTML = `<p class="result-message" style="color:#f87171;">Erreur: ${json.error}</p>`;
+          resetSubmit();
+          return;
+        }
+
+        if (json.code) {
+          currentCode = json.code;
+          pairResult.innerHTML = `
+            <div class="result-label">Votre code</div>
+            <div class="result-code">${currentCode}</div>
+          `;
+          copyCodeBtn.style.display = 'flex';
+        }
+      } catch (err) {
+        pairResult.innerHTML = '<p class="result-message" style="color:#f87171;">Erreur de connexion au serveur</p>';
       }
 
-      if (json.dir) {
-        const dir = json.dir;
+      resetSubmit();
+    });
 
-        let tries = 0;
-        const maxTries = 60;
-        const interval = setInterval(async () => {
-          tries++;
-          const sessionRes = await fetch(`/session_id?dir=${dir}`);
-          const sessionJson = await sessionRes.json();
-
-          if (sessionJson.session_id) {
-            currentSessionId = sessionJson.session_id;
-            sessionId.textContent = currentSessionId;
-            sessionBox.style.display = 'block';
-            copySessionBtn.style.display = 'flex';
-            clearInterval(interval);
-          }
-
-          if (tries >= maxTries) clearInterval(interval);
-        }, 2000);
-      }
-    } catch (err) {
-      pairResult.textContent = 'Erreur de connexion au serveur';
+    function resetSubmit() {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fas fa-bolt"></i><span>Générer</span>';
     }
 
-    resetSubmit();
-  });
+    copyCodeBtn.onclick = () => {
+      navigator.clipboard.writeText(currentCode);
+      copyCodeBtn.classList.add('copied');
+      copyCodeBtn.innerHTML = '<i class="fas fa-check"></i><span id="copyText">Code copié !</span>';
+      setTimeout(() => {
+        copyCodeBtn.classList.remove('copied');
+        copyCodeBtn.innerHTML = '<i class="fas fa-copy"></i><span id="copyText">Copier le code</span>';
+      }, 2000);
+    };
 
-  function resetSubmit() {
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Go';
-  }
-
-  copyCodeBtn.onclick = () => {
-    navigator.clipboard.writeText(currentCode);
-    copyCodeBtn.innerHTML = '<i class="fas fa-check"></i> Copié !';
-    setTimeout(() => copyCodeBtn.innerHTML = '<i class="fas fa-copy"></i> Copier le CODE', 1500);
-  };
-
-  copySessionBtn.onclick = () => {
-    navigator.clipboard.writeText(currentSessionId);
-    copySessionBtn.innerHTML = '<i class="fas fa-check"></i> Copié !';
-    setTimeout(() => copySessionBtn.innerHTML = '<i class="fas fa-copy"></i> Copier la SESSION-ID', 1500);
-  };
-</script>
-
+    numberInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') submitBtn.click();
+    });
+  </script>
 </body>
 </html>
