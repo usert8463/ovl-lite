@@ -5,8 +5,7 @@ const { Sequelize, DataTypes, Op } = require('sequelize');
 const sessionMap = new Map();
 
 const dbUrl =
-  "postgresql://postgres.mkvywsrvpbngcaabihlb:database@passWord1@aws-0-eu-north-1.pooler.supabase.com:6543/postgres";
-
+  "postgresql://postgres:database@passWord1@db.slhhwogbunpkisjibhxy.supabase.co:5432/postgres";
 const sequelize = new Sequelize(dbUrl, {
   dialect: 'postgres',
   ssl: true,
