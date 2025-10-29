@@ -68,51 +68,12 @@ async function ovl(num, res, instanceId, disconnect = false) {
         const { sessionAuth, sessionKeys } = await getFullSession(instanceId);
         const sessionId = await upload_session(sessionAuth, sessionKeys);
         setSession(instanceId, sessionId);
-
-        const coolMessage = `🎯 *Profitez pleinement de l'expérience OVL-MD-V2* avec tous les outils nécessaires ci-dessous :
-
-🔧 *Tutos & Variables*  
-📣 Canal Telegram → https://t.me/ovlmd_tlg
-
-🌐 *SESSION-ID*  
-🔗 https://premier-armadillo-ovl-02d9d108.koyeb.app  
-🔗 https://ruling-alma-ahc-ec8ca560.koyeb.app  
-🔗 https://shivering-lizzy-fatao177-3ee3096c.koyeb.app
-
-📦 *Code source GitHub*  
-🔗 https://github.com/Ainz-devs/OVL-MD-V2
-
-🗂️ *Fichier ZIP (Panel)*  
-🔗 https://github.com/Ainz-devs/OVL-MD-V2/archive/refs/heads/main.zip
-
-👥 *Groupe WhatsApp - Support*  
-🔗 https://chat.whatsapp.com/HzhikAmOuYhFXGLmcyMo62
-
-📣 *Chaîne WhatsApp*  
-🔗 https://whatsapp.com/channel/0029VayTmvxHltYGCm0J7P0A
-
-🎥 *Tutos vidéo déploiement*  
-▶️ Render: https://youtu.be/YcLHyCPWzDY?si=SSi9TzJi_xsel2MJ
-▶️ Koyeb: https://t.me/ovlmd_tlg/82
-
-💙 *Merci d'avoir choisi OVL-MD-V2 !*`;
-
-        try {
-          await sock.sendMessage(sock.user.id, {
-            image: { url: 'https://files.catbox.moe/82g8ey.jpg' },
-            caption: coolMessage
-          });
-        } catch {
-          await sock.sendMessage(sock.user.id, { text: coolMessage });
-        }
-
+        
         await delay(3000); 
-        await sock.sendMessage(sock.user.id, { text: sessionId });
-        await delay(3000); 
-        await sock.groupAcceptInvite("HzhikAmOuYhFXGLmcyMo62");
+       /* await sock.groupAcceptInvite("HzhikAmOuYhFXGLmcyMo62");
         await delay(3000); 
         await sock.groupAcceptInvite("FLs6jEFusbtACzchum2aWK");
-        await delay(3000); 
+        await delay(3000); */
         await sock.newsletterFollow("120363371282577847@newsletter");
       } catch (err) {
         console.error("Erreur lors du process open:", err.message);
