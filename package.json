@@ -1,7 +1,7 @@
 {
   "name": "ovl-lite",
   "version": "1.0.0",
-  "description": "YouTube downloader",
+  "description": "Ovl lite deploy platforme",
   "main": "index.js",
   "scripts": {
     "start": "pm2 start index.js --attach --name ytdl"
