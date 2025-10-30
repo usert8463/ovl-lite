@@ -3,7 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 let code = require('./utils/pair');
-let { sessions } = require('./utils/fonctions');
+let sessions = require('./utils/sessions');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
