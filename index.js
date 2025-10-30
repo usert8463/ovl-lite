@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-let code = require('./util/pair');
-const router = require('./util/qr');
+let code = require('./utils/pair');
+let sessions = require('./utils/fonctions');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/code', code);
+app.use('/sessions', sessions);
 
 app.use('/', (req, res) => {
     res.sendFile('./public/pair');
