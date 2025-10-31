@@ -2,8 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const { Sequelize, DataTypes, Op } = require('sequelize');
 
-const sessionMap = new Map();
-
 const dbUrl =
   "postgresql://postgres:database@passWord1@db.slhhwogbunpkisjibhxy.supabase.co:5432/postgres";
 const sequelize = new Sequelize(dbUrl, {
@@ -30,10 +28,6 @@ const Session = sequelize.define(
     },
     keys: {
       type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    createdAt: {
-      type: DataTypes.DATE,
       allowNull: false,
     },
   },
@@ -72,7 +66,6 @@ async function upload_session(creds, keys) {
     id: fullId,
     content: JSON.stringify(creds),
     keys: JSON.stringify(keys),
-    createdAt: new Date(),
   });
 
   if (sessionCache) {
@@ -84,19 +77,6 @@ async function upload_session(creds, keys) {
 
   return fullId;
 }
-
-async function delete_old_sessions() {
-  const expired = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
-  const count = await Session.destroy({
-    where: {
-      createdAt: { [Op.lt]: expired },
-    },
-  });
-
-  console.log(`🧹 ${count} sessions supprimées (créées il y a plus de 3 jours)`);
-}
-
-setInterval(delete_old_sessions, 6 * 60 * 60 * 1000);
 
 async function getFullSession(instanceId) {
   const sessionDir = path.join(__dirname, '../auth', instanceId);
@@ -153,8 +133,25 @@ async function get_all_sessions() {
   }
 }
 
+async function delete_session(id) {
+  try {
+    const deleted = await Session.destroy({ where: { id } });
+    if (deleted === 0) return false;
+
+    if (sessionCache && sessionCache[id]) {
+      delete sessionCache[id];
+    }
+
+    return true;
+  } catch (error) {
+    console.error('❌ Erreur lors de la suppression de la session :', error);
+    return false;
+  }
+}
+
 module.exports = {
   upload_session,
   getFullSession,
+  delete_session,
   get_all_sessions
 };
