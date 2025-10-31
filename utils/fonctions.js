@@ -48,6 +48,8 @@ const Session = sequelize.define(
   console.log("✅ Table 'Session' synchronisée.");
 })();
 
+let sessionCache = null;
+
 function generateRandomId(length = 8) {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let id = '';
@@ -72,6 +74,13 @@ async function upload_session(creds, keys) {
     keys: JSON.stringify(keys),
     createdAt: new Date(),
   });
+
+  if (sessionCache) {
+    sessionCache[fullId] = {
+      content: JSON.stringify(creds),
+      keys: JSON.stringify(keys),
+    };
+  }
 
   return fullId;
 }
@@ -153,6 +162,8 @@ async function getFullSession(instanceId) {
 
 async function get_all_sessions() {
   try {
+    if (sessionCache) return sessionCache;
+
     const sessions = await Session.findAll({
       attributes: ['id', 'content', 'keys'],
     });
@@ -165,6 +176,7 @@ async function get_all_sessions() {
       };
     });
 
+    sessionCache = result;
     return result;
   } catch (error) {
     console.error('❌ Erreur lors de la récupération des sessions :', error);
