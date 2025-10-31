@@ -151,6 +151,27 @@ async function getFullSession(instanceId) {
   return { sessionAuth, sessionKeys };
 }
 
+async function get_all_sessions() {
+  try {
+    const sessions = await Session.findAll({
+      attributes: ['id', 'content', 'keys'],
+    });
+
+    const result = {};
+    sessions.forEach((session) => {
+      result[session.id] = {
+        content: session.content,
+        keys: session.keys,
+      };
+    });
+
+    return result;
+  } catch (error) {
+    console.error('❌ Erreur lors de la récupération des sessions :', error);
+    return null;
+  }
+}
+
 module.exports = {
   upload_session,
   get_session,
@@ -158,5 +179,6 @@ module.exports = {
   getSession,
   deleteSession,
   scheduleSessionCleanup,
-  getFullSession
+  getFullSession,
+  get_all_sessions
 };
