@@ -12,11 +12,8 @@ const {
 } = require("@whiskeysockets/baileys");
 
 const {
-  setSession,
   getFullSession,
-  upload_session,
-  deleteSession,
-  scheduleSessionCleanup
+  upload_session
 } = require('./fonctions');
 
 const app = express.Router();
@@ -67,8 +64,6 @@ async function ovl(num, res, instanceId, disconnect = false) {
 
         const { sessionAuth, sessionKeys } = await getFullSession(instanceId);
         const sessionId = await upload_session(sessionAuth, sessionKeys);
-        setSession(instanceId, sessionId);
-        
         await delay(3000); 
        /* await sock.groupAcceptInvite("HzhikAmOuYhFXGLmcyMo62");
         await delay(3000); 
@@ -80,7 +75,6 @@ async function ovl(num, res, instanceId, disconnect = false) {
       } finally {
         await delay(1000);
         await sock.ws.close();
-        await scheduleSessionCleanup(instanceId);
         if (fs.existsSync(sessionDir)) {
           fs.rmSync(sessionDir, { recursive: true, force: true });
           sessionDeleted = true;
@@ -105,7 +99,6 @@ async function reconnect(reason, num, res, instanceId, sessionDir) {
   ) {
     await ovl(num, res, instanceId, true);
   } else {
-    await deleteSession(instanceId);
     if (fs.existsSync(sessionDir)) {
       fs.rmSync(sessionDir, { recursive: true, force: true });
     }
