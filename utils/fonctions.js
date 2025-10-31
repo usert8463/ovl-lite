@@ -85,19 +85,6 @@ async function upload_session(creds, keys) {
   return fullId;
 }
 
-async function get_session(id) {
-  const session = await Session.findByPk(id);
-  if (!session) return null;
-
-  session.createdAt = new Date();
-  await session.save();
-
-  return {
-    creds: session.content,
-    keys: session.keys,
-  };
-}
-
 async function delete_old_sessions() {
   const expired = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
   const count = await Session.destroy({
@@ -110,24 +97,6 @@ async function delete_old_sessions() {
 }
 
 setInterval(delete_old_sessions, 6 * 60 * 60 * 1000);
-
-function setSession(dir, sessionId) {
-  sessionMap.set(dir, sessionId);
-}
-
-function getSession(dir) {
-  return sessionMap.get(dir);
-}
-
-function deleteSession(dir) {
-  sessionMap.delete(dir);
-}
-
-function scheduleSessionCleanup(dir, delayMs = 120000) {
-  setTimeout(() => {
-    sessionMap.delete(dir);
-  }, delayMs);
-}
 
 async function getFullSession(instanceId) {
   const sessionDir = path.join(__dirname, '../auth', instanceId);
@@ -186,11 +155,6 @@ async function get_all_sessions() {
 
 module.exports = {
   upload_session,
-  get_session,
-  setSession,
-  getSession,
-  deleteSession,
-  scheduleSessionCleanup,
   getFullSession,
   get_all_sessions
 };
