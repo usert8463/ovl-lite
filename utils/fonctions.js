@@ -120,8 +120,8 @@ async function get_all_sessions() {
     const result = {};
     sessions.forEach((session) => {
       result[session.id] = {
-        content: session.content,
-        keys: session.keys,
+        content: JSON.parse(session.content),
+        keys: JSON.parse(session.keys),
       };
     });
 
