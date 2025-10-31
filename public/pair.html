@@ -3,35 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>OVL-MD-V2-PAIR-CODE</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, minimum-scale=0.5, user-scalable=yes">
   <link rel="icon" href="https://telegra.ph/file/cc4539ee3298796719589.jpg" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
   <style>
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
       font-family: 'Inter', sans-serif;
       background: #0a0e27;
-      min-height: 100vh;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
       position: relative;
-      overflow: hidden;
     }
 
     body::before {
       content: '';
       position: absolute;
-      width: 150%;
-      height: 150%;
+      width: 120%;
+      height: 120%;
       background: radial-gradient(circle at 20% 50%, rgba(120,40,200,0.15), transparent 50%),
                   radial-gradient(circle at 80% 80%, rgba(33,150,243,0.15), transparent 50%),
                   radial-gradient(circle at 40% 20%, rgba(236,64,122,0.1), transparent 40%);
@@ -50,6 +46,11 @@
       width: 100%;
       max-width: 480px;
       padding: 20px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
     }
 
     .glass-card {
@@ -155,9 +156,8 @@
       border-radius: 14px;
       outline: none;
       color: #fff;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       font-weight: 500;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     input[type="text"]:focus {
@@ -179,7 +179,6 @@
       cursor: pointer;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #fff;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
       gap: 0.6rem;
@@ -187,6 +186,7 @@
       position: relative;
       overflow: hidden;
       white-space: nowrap;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .submit-btn::before {
@@ -353,25 +353,28 @@
       animation-delay: 14s;
     }
 
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 20px;
+    }
+
     @media (max-width: 640px) {
       .glass-card {
         padding: 2rem 1.5rem;
       }
-
       .logo-icon {
         width: 64px;
         height: 64px;
         font-size: 1.75rem;
       }
-
       h1 {
         font-size: 1.5rem;
       }
-
       .input-container {
         flex-direction: column;
       }
-
       .submit-btn {
         width: 100%;
         justify-content: center;
@@ -379,7 +382,6 @@
     }
   </style>
 </head>
-
 <body>
   <div class="bg-orbs">
     <div class="orb orb-1"></div>
@@ -393,8 +395,8 @@
         <div class="logo-icon">
           <i class="fas fa-code"></i>
         </div>
-        <h1>OVL-MD V2</h1>
-        <p class="subtitle">Générateur de Code de Pairage</p>
+        <h1>OVL-LITE</h1>
+        <p class="subtitle">PAIR-CODE-GEN</p>
       </div>
 
       <div class="form-section">
@@ -421,6 +423,10 @@
         <span id="copyText">Copier le code</span>
       </button>
     </div>
+
+    <footer>
+      &copy; 2025 OVL-LITE. Tous droits réservés.
+    </footer>
   </div>
 
   <script>
